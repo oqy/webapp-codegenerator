@@ -1,0 +1,29 @@
+package ${classFullNamePrefix}.model.enumField;
+
+import com.fusung.webapp.core.model.enumField.CoreEnumInterface;
+import com.fusung.webapp.core.model.enumField.EnumDescriptionHelper;
+
+#if($intEnum)
+#set($targetType="Integer")
+#else
+#set($targetType="String")
+#end
+public enum $enumClassName implements CoreEnumInterface<$targetType> {
+	#foreach($enumInfo in $enumInfoList)
+	${enumInfo.variableName}(${enumInfo.value})#if($velocityCount==$enumInfoList.size());#else,#end // $enumInfo.description
+	#end
+	
+	private $targetType typeValue;
+	
+	private $enumClassName($targetType tValue){
+		this.typeValue=tValue;
+	}
+
+	public String getDescription() {
+		return EnumDescriptionHelper.getDescription(this);
+	}
+
+	public $targetType getValue() {
+		return typeValue;
+	}
+}

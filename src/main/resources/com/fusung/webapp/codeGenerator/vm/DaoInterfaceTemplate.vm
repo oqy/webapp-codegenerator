@@ -1,0 +1,9 @@
+package ${c.packageName}.persistence;
+
+import com.fusung.webapp.core.persistence.IBaseDao;
+import ${c.classFullName};
+import ${c.criteriaFullName};
+
+public interface I${c.alias}Dao extends IBaseDao<${c.alias}Info,${c.alias}Criteria> {
+
+}

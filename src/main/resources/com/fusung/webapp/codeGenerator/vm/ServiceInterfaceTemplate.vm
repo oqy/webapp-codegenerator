@@ -1,0 +1,9 @@
+package ${c.packageName}.service;
+
+import com.fusung.webapp.core.service.IBaseService;
+import ${c.classFullName};
+import ${c.criteriaFullName};
+
+public interface I${c.alias} extends IBaseService<${c.alias}Info,${c.alias}Criteria> {
+
+}
