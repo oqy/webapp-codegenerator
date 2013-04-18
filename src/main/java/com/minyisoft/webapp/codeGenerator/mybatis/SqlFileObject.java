@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 public class SqlFileObject {
 	//sql�ļ�·��

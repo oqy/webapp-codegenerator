@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.coreEnum;
+package com.minyisoft.webapp.codeGenerator.coreEnum;
 
 import lombok.Getter;
 import lombok.Setter;

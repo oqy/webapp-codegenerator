@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.util;
+package com.minyisoft.webapp.codeGenerator.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.fusung.webapp.codeGenerator.config.CodeGeneratorConfig;
+import com.minyisoft.webapp.codeGenerator.config.CodeGeneratorConfig;
 
 public final class CodeGeneratorUtil {
 	private CodeGeneratorUtil() {

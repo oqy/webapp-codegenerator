@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.coreEnum;
+package com.minyisoft.webapp.codeGenerator.coreEnum;
 
 import java.io.File;
 import java.util.HashMap;
@@ -13,8 +13,8 @@ import org.apache.velocity.app.VelocityEngine;
 import org.eclipse.swt.widgets.Text;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.fusung.webapp.codeGenerator.config.CodeGeneratorConfig;
-import com.fusung.webapp.codeGenerator.util.CodeGeneratorUtil;
+import com.minyisoft.webapp.codeGenerator.config.CodeGeneratorConfig;
+import com.minyisoft.webapp.codeGenerator.util.CodeGeneratorUtil;
 
 public class CoreEnumGeneratorUtil {
 	private static Logger logger = Logger.getLogger(CoreEnumGeneratorUtil.class);

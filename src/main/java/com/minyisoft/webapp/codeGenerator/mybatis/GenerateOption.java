@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,14 +24,4 @@ public class GenerateOption {
 	private boolean isGenerateCRUDPermission;
 	//pojo类中文名称
 	private String pojoChineseName;
-	//是否生成SQL文件
-	private boolean isSetSqlFile;
-	//是否新SQL文件
-	private boolean isNewSqlFileScheme;
-	//是否原有SQL文件
-	private boolean isAddSqlFileScheme;
-	//是否执行到本地数据库
-	private boolean isLocalScheme;
-	//是否执行到服务器数据库
-	private boolean isServerScheme;
 }

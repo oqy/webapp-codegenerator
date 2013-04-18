@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 import java.util.ArrayList;
 import java.util.List;

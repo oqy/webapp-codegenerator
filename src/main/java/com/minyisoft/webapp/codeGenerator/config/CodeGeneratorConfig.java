@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.config;
+package com.minyisoft.webapp.codeGenerator.config;
 
 import java.util.HashMap;
 import java.util.Map;

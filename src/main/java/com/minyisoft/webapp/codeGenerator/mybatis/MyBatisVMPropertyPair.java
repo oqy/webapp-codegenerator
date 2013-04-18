@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;

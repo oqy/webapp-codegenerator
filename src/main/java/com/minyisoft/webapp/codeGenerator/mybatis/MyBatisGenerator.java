@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -34,10 +34,9 @@ public class MyBatisGenerator {
 	private Table table;
 	private Text sqlOutput;
 	private Text outputFolderPath;
-	private Text sqlFileOutputFolderPath;
 	private Text pojoFileName;
 	private List<PojoProperty> propertyInfoList=null; 
-	protected Shell shell;
+	protected Shell shlMybatis;
 
 	/**
 	 * Launch the application
@@ -58,9 +57,9 @@ public class MyBatisGenerator {
 	public void open() {
 		final Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlMybatis.open();
+		shlMybatis.layout();
+		while (!shlMybatis.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
 		}
@@ -70,13 +69,13 @@ public class MyBatisGenerator {
 	 * Create contents of the window
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(800, 680);
-		shell.setText("ibatis配置文件生成器");
+		shlMybatis = new Shell();
+		shlMybatis.setSize(800, 622);
+		shlMybatis.setText("MyBatis配置文件生成器");
 
-		final Group group = new Group(shell, SWT.NONE);
+		final Group group = new Group(shlMybatis, SWT.NONE);
 		group.setText("功能选项卡");
-		group.setBounds(10, 10, 772, 460);
+		group.setBounds(10, 10, 772, 413);
 
 		final Label label = new Label(group, SWT.NONE);
 		label.setBounds(10, 22,174, 12);
@@ -87,7 +86,7 @@ public class MyBatisGenerator {
 		
 		final Group group_2 = new Group(group, SWT.NONE);
 		group_2.setText("SQL语法");
-		group_2.setBounds(10, 147, 300, 45);
+		group_2.setBounds(10, 96, 300, 45);
 
 		final Button isOracleScheme = new Button(group_2, SWT.RADIO);
 		isOracleScheme.setSelection(true);
@@ -99,7 +98,7 @@ public class MyBatisGenerator {
 		isMySQLScheme.setBounds(137, 20, 93, 16);
 
 		final Group group_2_1 = new Group(group, SWT.NONE);
-		group_2_1.setBounds(316, 147, 364, 45);
+		group_2_1.setBounds(316, 96, 364, 45);
 		group_2_1.setText("SQL语句");
 
 		final Button isGenerateSQLAlterAdd = new Button(group_2_1, SWT.RADIO);
@@ -111,9 +110,9 @@ public class MyBatisGenerator {
 		isGenerateSQLDDL.setSelection(true);
 		isGenerateSQLDDL.setText("生成SQL DDL语句");
 
-		final Group group_1 = new Group(shell, SWT.NONE);
+		final Group group_1 = new Group(shlMybatis, SWT.NONE);
 		group_1.setText("SQL语句");
-		group_1.setBounds(10, 487, 772, 150);
+		group_1.setBounds(10, 429, 772, 150);
 
 		final Button isGenIBatisConfigFile = new Button(group, SWT.CHECK);
 		isGenIBatisConfigFile.setBounds(10, 74,129, 16);
@@ -134,7 +133,7 @@ public class MyBatisGenerator {
 		browseButton.setBounds(316, 38,48, 22);
 		browseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent arg0) {
-				FileDialog filedlg=new FileDialog(shell,SWT.OPEN);
+				FileDialog filedlg=new FileDialog(shlMybatis,SWT.OPEN);
 		        //设置文件对话框的标题
 		        filedlg.setText("java pojo类文件选择");
 		        //设置初始路径
@@ -147,7 +146,7 @@ public class MyBatisGenerator {
 		        		if(currentFolderPath.endsWith("model")){
 		        			currentFolderPath=currentFolderPath.substring(0, currentFolderPath.length()-5);
 		        		}else{
-		        			MessageBox messageBox = new MessageBox(shell, SWT.OK);
+		        			MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 							messageBox
 									.setMessage("java pojo类文件应放置在包含model目录的文件路径内，请检查");
 							messageBox.open(); 
@@ -176,7 +175,7 @@ public class MyBatisGenerator {
 		        			e.printStackTrace();
 		        		}
 		        	}else{
-		        		MessageBox messageBox = new MessageBox(shell, SWT.OK);
+		        		MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 						messageBox
 								.setMessage("java pojo类文件应放置在包含src目录的文件路径内，请检查");
 						messageBox.open(); 
@@ -186,9 +185,9 @@ public class MyBatisGenerator {
 		});
 		browseButton.setText("浏览");
 
-		final Label label_1 = new Label(group, SWT.NONE);
-		label_1.setBounds(380, 22,192, 12);
-		label_1.setText("请选择ibatis配置文件的输出路径：");
+		final Label lblmybatis = new Label(group, SWT.NONE);
+		lblmybatis.setBounds(380, 22,192, 12);
+		lblmybatis.setText("请选择MyBatis配置文件的输出路径：");
 
 		outputFolderPath = new Text(group, SWT.BORDER);
 		outputFolderPath.setBounds(380, 40,300, 25);
@@ -197,7 +196,7 @@ public class MyBatisGenerator {
 		browseButton2.setBounds(686, 38,48, 22);
 		browseButton2.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent arg0) {
-				DirectoryDialog folderdlg=new DirectoryDialog(shell);
+				DirectoryDialog folderdlg=new DirectoryDialog(shlMybatis);
 		        //设置文件对话框的标题
 		        folderdlg.setText("配置文件输出目录选择");
 		        //设置初始路径
@@ -212,80 +211,21 @@ public class MyBatisGenerator {
 			}
 		});
 		browseButton2.setText("浏览");
-
-		//+++++++++++++++++++++++++++++
-		final Group groupSqlFileSet = new Group(group, SWT.NONE);
-		groupSqlFileSet.setText("SQL文件生成选项");
-		groupSqlFileSet.setBounds(10, 96, 753, 47);
-
-		sqlFileOutputFolderPath = new Text(groupSqlFileSet, SWT.BORDER);
-		sqlFileOutputFolderPath.setBounds(10, 15,290, 25);
-		
-		final Button browseButton3 = new Button(groupSqlFileSet, SWT.NONE);
-		browseButton3.setBounds(310, 12,48, 22);
-		browseButton3.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(final SelectionEvent arg0) {
-				FileDialog sqlFile=new FileDialog(shell,SWT.OPEN);
-		        //设置文件对话框的标题
-				sqlFile.setText("Sql文件选择");
-		        //设置初始路径
-				sqlFile.setFilterPath("SystemRoot");
-		        //打开文件对话框，返回选中文件的绝对路径
-		        String selectedFile=sqlFile.open();
-		        if(!StringUtils.isBlank(selectedFile)){
-		        	sqlFileOutputFolderPath.setText(selectedFile);
-		        }
-			}
-		});
-		browseButton3.setText("浏览");
-		
-		final Button isSetSqlFile = new Button(groupSqlFileSet, SWT.CHECK);
-		isSetSqlFile.setBounds(370, 12,90, 30);
-		isSetSqlFile.setSelection(true);
-		isSetSqlFile.setText("生成SQL文件");
-
-		final Group groupNewFileSet = new Group(groupSqlFileSet, SWT.NONE);
-		groupNewFileSet.setText("新SQL文件选项");
-		groupNewFileSet.setBounds(460, 10, 160, 35);
-		
-		final Button isNewSqlFileScheme = new Button(groupNewFileSet, SWT.RADIO);
-		isNewSqlFileScheme.setSelection(true);
-		isNewSqlFileScheme.setText("新文件");
-		isNewSqlFileScheme.setBounds(10, 15, 60, 13);
-		
-		final Button isAddSqlFileScheme = new Button(groupNewFileSet, SWT.RADIO);
-		isAddSqlFileScheme.setSelection(false);
-		isAddSqlFileScheme.setText("追加到文件");
-		isAddSqlFileScheme.setBounds(75, 15, 80, 13);
-
-		final Group groupIsLoacl = new Group(groupSqlFileSet, SWT.NONE);
-		groupIsLoacl.setText("是否执行本地DB");
-		groupIsLoacl.setBounds(625, 10, 120, 35);
-		
-		final Button isLocalScheme = new Button(groupIsLoacl, SWT.CHECK);
-		isLocalScheme.setSelection(true);
-		isLocalScheme.setText("本地");
-		isLocalScheme.setBounds(10, 15, 45, 13);
-		
-		final Button isServerScheme = new Button(groupIsLoacl, SWT.CHECK);
-		isServerScheme.setSelection(true);
-		isServerScheme.setText("服务器");
-		isServerScheme.setBounds(60, 15, 55, 13);
 		//+++++++++++++++++++++++++++++
 		
 		final Button generateButton = new Button(group, SWT.NONE);
-		generateButton.setBounds(686, 161,48, 22);
+		generateButton.setBounds(686, 110,48, 22);
 		generateButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent arg0) {
 				if(StringUtils.isBlank(pojoFileName.getText())){
-					MessageBox messageBox = new MessageBox(shell, SWT.OK);
+					MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 					messageBox
 							.setMessage("java pojo类文件为空，请先选择");
 					messageBox.open(); 
 					return;
 				}
 				if(StringUtils.isBlank(outputFolderPath.getText())){
-					MessageBox messageBox = new MessageBox(shell, SWT.OK);
+					MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 					messageBox
 							.setMessage("输出配置文件的目标目录为空，请先选择");
 					messageBox.open(); 
@@ -294,7 +234,7 @@ public class MyBatisGenerator {
 				
 				/*若pojo属性链表中没有元素(或表格中没有行)，给予提示*/
 				if(table.getItems()==null||table.getItems().length==0||propertyInfoList==null||propertyInfoList.size()==0){
-					MessageBox messageBox = new MessageBox(shell, SWT.OK);
+					MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 					messageBox
 							.setMessage("属性列表为空");
 					messageBox.open(); 
@@ -314,7 +254,7 @@ public class MyBatisGenerator {
 				
 				/*若表格中所有行都没有被勾选，给予提示*/
 				if(uncheckCount==propertyInfoList.size()){
-					MessageBox messageBox = new MessageBox(shell, SWT.OK);
+					MessageBox messageBox = new MessageBox(shlMybatis, SWT.OK);
 					messageBox
 							.setMessage("您需要勾选表格中最少1行记录");
 					messageBox.open(); 
@@ -330,13 +270,7 @@ public class MyBatisGenerator {
 				option.setGenerateCRUDPermission(isGenerateCRUDPermission.getSelection());
 				option.setPojoChineseName(txtPojoChineseName.getText());
 				
-				option.setSetSqlFile(isSetSqlFile.getSelection());
-				option.setAddSqlFileScheme(isAddSqlFileScheme.getSelection());
-				option.setNewSqlFileScheme(isNewSqlFileScheme.getSelection());
-				option.setServerScheme(isServerScheme.getSelection());
-				option.setLocalScheme(isLocalScheme.getSelection());
-				
-				Map<String,Object> returnMap=MyBatisGeneratorUtil.generate(pojoFileName.getText(), outputFolderPath.getText(), sqlFileOutputFolderPath.getText(), propertyInfoList, option);
+				Map<String,Object> returnMap=MyBatisGeneratorUtil.generate(pojoFileName.getText(), outputFolderPath.getText(), propertyInfoList, option);
 				sqlOutput.setText(returnMap.get("SQL").toString());
 			}
 		});
@@ -346,7 +280,7 @@ public class MyBatisGenerator {
 		table = new Table(group, SWT.BORDER | SWT.CHECK | SWT.FULL_SELECTION);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		table.setBounds(10, 203, 752, 254);
+		table.setBounds(10, 147, 752, 254);
 
 		final TableColumn newColumnTableColumn_1 = new TableColumn(table, SWT.NONE);
 		newColumnTableColumn_1.setWidth(100);

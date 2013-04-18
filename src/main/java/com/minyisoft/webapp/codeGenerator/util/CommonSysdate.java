@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.util;
+package com.minyisoft.webapp.codeGenerator.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

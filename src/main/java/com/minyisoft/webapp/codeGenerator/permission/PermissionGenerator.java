@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.permission;
+package com.minyisoft.webapp.codeGenerator.permission;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,8 +18,8 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.fusung.webapp.codeGenerator.config.CodeGeneratorConfig;
-import com.fusung.webapp.codeGenerator.util.CodeGeneratorUtil;
+import com.minyisoft.webapp.codeGenerator.config.CodeGeneratorConfig;
+import com.minyisoft.webapp.codeGenerator.util.CodeGeneratorUtil;
 
 
 public class PermissionGenerator {

@@ -1,4 +1,4 @@
-package com.fusung.webapp.codeGenerator.mybatis;
+package com.minyisoft.webapp.codeGenerator.mybatis;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.fusung.webapp.codeGenerator.config.CodeGeneratorConfig;
-import com.fusung.webapp.codeGenerator.util.CodeGeneratorUtil;
+import com.minyisoft.webapp.codeGenerator.config.CodeGeneratorConfig;
+import com.minyisoft.webapp.codeGenerator.util.CodeGeneratorUtil;
 
 public class MyBatisGeneratorUtil {
 	private static Logger logger = Logger.getLogger(MyBatisGeneratorUtil.class);
@@ -29,13 +29,11 @@ public class MyBatisGeneratorUtil {
 	 * 根据option设定的条件，生成ibatis配置文件，写入pojo shortcut信息，及返回sql ddl或alter语句
 	 * @param targetPojoName
 	 * @param outputDictPath
-	 * @param outputSqlFilePath
 	 * @param pojoPropertyList
 	 * @param option
 	 * @return
 	 */
-	public static Map<String,Object> generate(String targetPojoName, String outputDictPath, String outputSqlFilePath,
-			List<PojoProperty> pojoPropertyList,GenerateOption option) {
+	public static Map<String,Object> generate(String targetPojoName, String outputDictPath,List<PojoProperty> pojoPropertyList,GenerateOption option) {
 		MyBatisVMTransferObject transferObject = new MyBatisVMTransferObject();
 
 		String classFullName = targetPojoName;
@@ -138,36 +136,6 @@ public class MyBatisGeneratorUtil {
 		}else if(option.isGenerateSQLAlterAdd()){
 			tableSql = alterTableSql;
 		}
-		//++++++++++++
-		/*生成SQL文件
-		if(option.isSetSqlFile()){
-			SqlFileObject sqlFileObject = new SqlFileObject();
-			sqlFileObject.setSql(tableSql.toString());
-			String temp = targetPojoName.substring(0, targetPojoName.lastIndexOf(".model"));
-			String projectBranchName = temp.substring(temp.lastIndexOf(".") + 1, temp.length()).toLowerCase();
-			String fileName = projectBranchName + CommonSysdate.getSysdate_yyyyMMddSim();
-			String sqlFilePath = CodeGeneratorConfig.SQL_FILE_ROOT + fileName + "\\SQL\\" + fileName + ".sql";
-			sqlFileObject.setSqlFilePath(sqlFilePath);
-			String exucuteLocalSqlFilePath = CodeGeneratorConfig.SQL_FILE_ROOT + fileName + "\\" + CodeGeneratorConfig.EXECUTE_LOCAL_SQL_FILE_NAME;
-			sqlFileObject.setExucuteLocalSqlFilePath(exucuteLocalSqlFilePath);
-			String exucuteServerSqlFilePath = CodeGeneratorConfig.SQL_FILE_ROOT + fileName + "\\" + CodeGeneratorConfig.EXECUTE_SERVER_SQL_FILE_NAME;
-			sqlFileObject.setExucuteServerSqlFilePath(exucuteServerSqlFilePath);
-			if(option.isNewSqlFileScheme()){//新文件
-				writeSqlFile(true, sqlFileObject);
-			} else if(option.isAddSqlFileScheme()){//追加到文件
-				String sqlPathField = "";
-				if(StringUtils.isBlank(outputSqlFilePath)) {
-					sqlPathField = sqlFilePath;
-				} else {
-					sqlPathField = outputSqlFilePath;
-				}
-				sqlFileObject.setSqlFilePath(sqlPathField);
-				writeSqlFile(false, sqlFileObject);
-			}
-			sqlFileObject.setSqlLogPath(CodeGeneratorConfig.SQL_LOG_PATH + fileName + ".log");
-			writeExecuteSqlFile(sqlFileObject, option);
-		}*/
-		//++++++++++++
 		resultMap.put("SQL", tableSql);
 		return resultMap;
 
@@ -239,90 +207,6 @@ public class MyBatisGeneratorUtil {
 			e.printStackTrace();
 		}
 	}
-
-	//+++++++++++++++
-	/**
-	 * 写sql文
-	 * @param transferObject
-	private static void writeSqlFile(boolean newFlag, SqlFileObject sqlFileObject){
-		try {
-			final String fileEndTag="exit;";
-			String sqlPath = sqlFileObject.getSqlFilePath();
-			if(newFlag) {
-				File newSqlFilePath = new File(sqlPath);
-				if(!newSqlFilePath.exists() && !sqlPath.endsWith(File.separator)) {
-					if(!newSqlFilePath.getParentFile().exists()) {
-						newSqlFilePath.getParentFile().mkdirs();
-					}
-					if(newSqlFilePath.exists()) {
-						newSqlFilePath.delete();
-					}
-					newSqlFilePath.createNewFile();
-				}
-				FileWriter fw=new FileWriter(sqlPath);
-				fw.write(sqlFileObject.getSql() + "\n" + fileEndTag);
-				fw.close();
-			} else {
-				FileReader fr=new FileReader(sqlPath);
-				BufferedReader br=new BufferedReader(fr);
-				String line=null;
-				StringBuffer sb=new StringBuffer();
-				while((line=br.readLine()) != null && !line.equalsIgnoreCase(fileEndTag)){
-					sb.append(line + "\n");
-				}
-				br.close();
-				fr.close();
-				sb.append("\n" + sqlFileObject.getSql());
-				FileWriter fw=new FileWriter(sqlPath);
-				fw.write(sb.toString() + "\n" + fileEndTag);
-				fw.close();
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	/**
-	 * 写sql文执行文件
-	 * @param sqlFileObject
-	 * @param option
-	private static void writeExecuteSqlFile(SqlFileObject sqlFileObject,GenerateOption option){
-		try {
-			if(option.isLocalScheme()) {
-				String exucuteLocalSqlPath = sqlFileObject.getExucuteLocalSqlFilePath();
-				File exucuteSqlFile = new File(exucuteLocalSqlPath);
-				if(!exucuteSqlFile.exists() && !exucuteLocalSqlPath.endsWith(File.separator)) {
-					if(!exucuteSqlFile.getParentFile().exists()) {
-						exucuteSqlFile.getParentFile().mkdirs();
-					}
-					if(!exucuteSqlFile.exists()) {
-						exucuteSqlFile.createNewFile();
-						FileWriter fw=new FileWriter(exucuteLocalSqlPath);
-						fw.write(sqlFileObject.getExucuteLocalSqlFileContent());
-						fw.close();
-					}
-				}
-			}
-			if(option.isServerScheme()) {
-				String exucuteServerSqlPath = sqlFileObject.getExucuteServerSqlFilePath();
-				File exucuteSqlFile = new File(exucuteServerSqlPath);
-				if(!exucuteSqlFile.exists() && !exucuteServerSqlPath.endsWith(File.separator)) {
-					if(!exucuteSqlFile.getParentFile().exists()) {
-						exucuteSqlFile.getParentFile().mkdirs();
-					}
-					if(!exucuteSqlFile.exists()) {
-						exucuteSqlFile.createNewFile();
-						FileWriter fw=new FileWriter(exucuteServerSqlPath);
-						fw.write(sqlFileObject.getExucuteServerSqlFileContent());
-						fw.close();
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	//+++++++++++++++
 	
 	/**
 	 * 向pojo shortcut属性文件追加信息
