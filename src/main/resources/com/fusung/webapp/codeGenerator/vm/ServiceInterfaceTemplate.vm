@@ -1,6 +1,6 @@
 package ${c.packageName}.service;
 
-import com.fusung.webapp.core.service.IBaseService;
+import com.minyisoft.webapp.core.service.IBaseService;
 import ${c.classFullName};
 import ${c.criteriaFullName};
 

@@ -1,7 +1,7 @@
 package ${c.packageName}.service.impl;
 
 import org.springframework.stereotype.Service;
-import com.fusung.webapp.core.service.impl.BaseServiceImpl;
+import com.minyisoft.webapp.core.service.impl.BaseServiceImpl;
 import ${c.criteriaFullName};
 import ${c.classFullName};
 import ${c.packageName}.persistence.I${c.alias}Dao;

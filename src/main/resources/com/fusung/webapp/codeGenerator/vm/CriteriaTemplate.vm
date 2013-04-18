@@ -1,6 +1,6 @@
 package ${c.packageName}.model.criteria;
 
-import com.fusung.webapp.core.model.criteria.BaseCriteria;
+import com.minyisoft.webapp.core.model.criteria.BaseCriteria;
 
 public class ${c.alias}Criteria extends BaseCriteria {
 }
