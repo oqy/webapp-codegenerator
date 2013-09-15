@@ -21,17 +21,17 @@ public final class CodeGeneratorConfig {
 	/**
 	 * 目标工程代码包根目录，供统一引用和修改
 	 */
-	public static final String TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\java\\com\\fusung\\webapp\\tex100\\";
+	public static final String TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\java\\com\\minyisoft\\webapp\\tex100\\";
 	
 	/**
 	 * 目标工程代码包根目录，供统一引用和修改
 	 */
-	public static final String TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\resources\\com\\fusung\\webapp\\tex100\\";
+	public static final String TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\resources\\com\\minyisoft\\webapp\\tex100\\";
 	
 	/**
 	 * 生成的类对象全名前缀
 	 */
-	public static final String CLASS_FULL_NAME_PREFIX="com.fusung.webapp.tex100.";
+	public static final String CLASS_FULL_NAME_PREFIX="com.minyisoft.webapp.tex100.";
 	
 	/**
 	 * 目标工程枚举描述文件名，供统一引用和修改
@@ -82,27 +82,27 @@ public final class CodeGeneratorConfig {
 	/**
 	 * mybatis模板路径
 	 */
-	public static final String MYBATIS_TEMPLATE_FILE="com/fusung/webapp/codeGenerator/vm/MyBatisTemplate.vm";
+	public static final String MYBATIS_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/MyBatisTemplate.vm";
 	/**
 	 * 过滤对象模板路径
 	 */
-	public static final String CRITERIA_TEMPLATE_FILE="com/fusung/webapp/codeGenerator/vm/CriteriaTemplate.vm";
+	public static final String CRITERIA_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/CriteriaTemplate.vm";
 	/**
 	 * DAO接口对象模板路径
 	 */
-	public static final String DAO_INTERFACE_TEMPLATE_FILE="com/fusung/webapp/codeGenerator/vm/DaoInterfaceTemplate.vm";
+	public static final String DAO_INTERFACE_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/DaoInterfaceTemplate.vm";
 	/**
 	 * 服务接口对象模板路径
 	 */
-	public static final String SERVICE_INTERFACE_TEMPLATE_FILE="com/fusung/webapp/codeGenerator/vm/ServiceInterfaceTemplate.vm";
+	public static final String SERVICE_INTERFACE_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/ServiceInterfaceTemplate.vm";
 	/**
 	 * 服务实现类模板路径
 	 */
-	public static final String SERVICE_IMPL_TEMPLATE_FILE="com/fusung/webapp/codeGenerator/vm/ServiceImplTemplate.vm";
+	public static final String SERVICE_IMPL_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/ServiceImplTemplate.vm";
 	/**
 	 * 枚举模板路径
 	 */
-	public static final String ENUM_TEMPLATE="com/fusung/webapp/codeGenerator/vm/CoreEnumTemplate.vm";
+	public static final String ENUM_TEMPLATE="com/minyisoft/webapp/codeGenerator/vm/CoreEnumTemplate.vm";
 	
 	/**
 	 * 数据表表名前缀

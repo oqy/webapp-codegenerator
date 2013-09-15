@@ -12,9 +12,9 @@ public class SqlFileObject {
 //	//sql��ִ���ļ�����
 //	private String exucuteSqlFileContent;
 	//sql��ִ���ļ�����ǰ(����)
-	private String text1 = "sqlplus fusung/fusung@xe @";
+	private String text1 = "sqlplus minyisoft/minyisoft@xe @";
 	//sql��ִ���ļ�����ǰ(������)
-	private String text2 = "sqlplus fusung/fusung@192.168.0.253/xe @";
+	private String text2 = "sqlplus minyisoft/minyisoft@192.168.0.253/xe @";
 	//sql��Log�ļ�·��
 	private String sqlLogPath;
 	
