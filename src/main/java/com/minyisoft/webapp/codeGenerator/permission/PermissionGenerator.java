@@ -1,9 +1,7 @@
 package com.minyisoft.webapp.codeGenerator.permission;
 
 import java.io.File;
-import java.util.Arrays;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -18,8 +16,13 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import com.minyisoft.webapp.codeGenerator.config.CodeGeneratorConfig;
-import com.minyisoft.webapp.codeGenerator.util.CodeGeneratorUtil;
+import com.minyisoft.webapp.core.model.CoreBaseInfo;
+import com.minyisoft.webapp.core.model.IModelObject;
+import com.minyisoft.webapp.core.model.PermissionInfo;
+import com.minyisoft.webapp.core.utils.ObjectUuidUtils;
 
 
 public class PermissionGenerator {
@@ -89,13 +92,13 @@ public class PermissionGenerator {
 		        String selectedFile=filedlg.open();
 		        if(!StringUtils.isBlank(selectedFile)){
 		        	if(selectedFile.indexOf("src")>0){
-		        		String className=selectedFile.substring(selectedFile.lastIndexOf("src")+4,selectedFile.lastIndexOf(".")).replace('\\', '.');
+		        		String className=CodeGeneratorConfig.CLASS_FULL_NAME_PREFIX+StringUtils.substringBetween(selectedFile, CodeGeneratorConfig.TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT, ".java").replace('\\', '.');
 		        		String simpleName=className.substring(className.lastIndexOf('.')+1);
 		        		if(simpleName.endsWith("Info")){
 		        			simpleName=simpleName.substring(0,simpleName.length()-4);
 		        		}
 		        		txtPojoName.setText(className);
-		        		txtOutputFileName.setText(selectedFile.substring(0,selectedFile.lastIndexOf("model"))+"security\\permission\\"+simpleName+".permission");
+		        		txtOutputFileName.setText(CodeGeneratorConfig.TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT+StringUtils.substringBetween(selectedFile, CodeGeneratorConfig.TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT, "model")+"security\\permission\\"+simpleName+".permission");
 		        		txtPojoPermissionValue.setText(simpleName+":");
 		        	}else{
 		        		MessageBox messageBox = new MessageBox(shell, SWT.OK);
@@ -151,9 +154,13 @@ public class PermissionGenerator {
 
 		final Button button = new Button(group, SWT.NONE);
 		button.addSelectionListener(new SelectionAdapter() {
+			@SuppressWarnings("unchecked")
 			public void widgetSelected(final SelectionEvent arg0) {
 				MessageBox messageBox = null;
-				if(StringUtils.isBlank(txtPojoName.getText())||StringUtils.isBlank(txtOutputFileName.getText())||StringUtils.isBlank(txtPermissionName.getText())||StringUtils.isBlank(txtPojoPermissionValue.getText())){
+				if (StringUtils.isBlank(txtPojoName.getText())
+						|| StringUtils.isBlank(txtOutputFileName.getText())
+						|| StringUtils.isBlank(txtPermissionName.getText())
+						|| StringUtils.isBlank(txtPojoPermissionValue.getText())) {
 					messageBox = new MessageBox(shell, SWT.OK);
 					messageBox.setMessage("请选择pojo类、设置权限文件输出路径、输入权限名称及简码");
 					messageBox.open(); 
@@ -161,12 +168,24 @@ public class PermissionGenerator {
 				}
 				
 				try {
-					StringBuffer sb = new StringBuffer(CodeGeneratorUtil.createObjectID(CodeGeneratorConfig.PERMISSION_MODEL_KEY));
+					Class<?> modelClazz=Class.forName(txtPojoName.getText());
+					if(!CoreBaseInfo.class.isAssignableFrom(modelClazz)){
+						messageBox = new MessageBox(shell, SWT.OK);
+						messageBox.setMessage("指定的java类并非继承自"+CoreBaseInfo.class.getName());
+						messageBox.open(); 
+						return;
+					}
+					
+					ObjectUuidUtils.registerModelClass(PermissionInfo.class);
+					ObjectUuidUtils.registerModelClass((Class<? extends IModelObject>)modelClazz);
+					
+					StringBuffer sb = new StringBuffer(ObjectUuidUtils.createObjectID(PermissionInfo.class));
 					sb.append("=").append(txtPojoPermissionValue.getText());
 					sb.append(",").append(txtPermissionName.getText());
-					sb.append(",").append(CodeGeneratorUtil.getPojoKey(txtPojoName.getText()));
+					sb.append(",").append(ObjectUuidUtils.getClassShortKey((Class<? extends IModelObject>)modelClazz));
+					sb.append("\\n");
 					
-					FileUtils.writeLines(new File(txtOutputFileName.getText()), Arrays.asList(sb),true);
+					Files.append(sb, new File(txtOutputFileName.getText()), Charsets.UTF_8);
 					
 					messageBox = new MessageBox(shell, SWT.OK);
 					messageBox.setMessage("权限文件输出成功");

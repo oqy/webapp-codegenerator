@@ -4,6 +4,6 @@ import com.minyisoft.webapp.core.service.IBaseService;
 import ${c.classFullName};
 import ${c.criteriaFullName};
 
-public interface I${c.alias} extends IBaseService<${c.alias}Info,${c.alias}Criteria> {
+public interface ${c.alias}Service extends BaseService<${c.alias}Info,${c.alias}Criteria> {
 
 }

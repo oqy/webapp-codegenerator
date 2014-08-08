@@ -1,4 +1,4 @@
-package com.minyisoft.webapp.codeGenerator.coreEnum;
+package com.minyisoft.webapp.codeGenerator.describableEnum;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +17,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-
-public class CoreEnumGenerator {
+public class DescribableEnumGenerator {
 
 	private Button button;
 	private Text remark6;
@@ -44,14 +43,15 @@ public class CoreEnumGenerator {
 	private Text txtModuleName;
 	private Button chkIntEnum;
 	private Button chkStringEnum;
-	
+
 	/**
 	 * Launch the application
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			CoreEnumGenerator window = new CoreEnumGenerator();
+			DescribableEnumGenerator window = new DescribableEnumGenerator();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -174,12 +174,12 @@ public class CoreEnumGenerator {
 		remark6 = new Text(shell, SWT.BORDER);
 		remark6.setTabs(18);
 		remark6.setBounds(336, 278, 146, 25);
-		
+
 		chkIntEnum = new Button(shell, SWT.RADIO);
 		chkIntEnum.setSelection(true);
 		chkIntEnum.setBounds(270, 57, 69, 16);
 		chkIntEnum.setText("\u6574\u5F62\u679A\u4E3E");
-		
+
 		chkStringEnum = new Button(shell, SWT.RADIO);
 		chkStringEnum.setBounds(360, 57, 109, 16);
 		chkStringEnum.setText("\u5B57\u7B26\u578B\u679A\u4E3E");
@@ -187,81 +187,90 @@ public class CoreEnumGenerator {
 		button = new Button(shell, SWT.NONE);
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(final SelectionEvent arg0) {
-				if(StringUtils.isBlank(txtClassName.getText())||StringUtils.isBlank(txtModuleName.getText())){
-					MessageBox messageBox = new MessageBox(shell,SWT.OK);
+				if (StringUtils.isBlank(txtClassName.getText()) || StringUtils.isBlank(txtModuleName.getText())) {
+					MessageBox messageBox = new MessageBox(shell, SWT.OK);
 					messageBox.setMessage("模块名及枚举类目均不能为空！");
-					messageBox.open(); 
+					messageBox.open();
 					return;
 				}
-				
-				Map<String,Object> inputMap=new HashMap<String,Object>();
+
+				Map<String, Object> inputMap = new HashMap<String, Object>();
 				inputMap.put("enumName", txtClassName.getText());
 				inputMap.put("modelName", txtModuleName.getText());
-				
-				boolean isIntEnum=chkIntEnum.getSelection();
-				List<CoreEnumSpecInfo<?>> enumsList=new ArrayList<CoreEnumSpecInfo<?>>();
-				enumsList.add(CoreEnumGeneratorUtil.createCoreEnumSpecInfo(variableName1,value1,remark1,isIntEnum));
-				enumsList.add(CoreEnumGeneratorUtil.createCoreEnumSpecInfo(variableName2,value2,remark2,isIntEnum));
-				enumsList.add(CoreEnumGeneratorUtil.createCoreEnumSpecInfo(variableName3,value3,remark3,isIntEnum));
-				enumsList.add(CoreEnumGeneratorUtil.createCoreEnumSpecInfo(variableName4,value4,remark4,isIntEnum));
-				enumsList.add(CoreEnumGeneratorUtil.createCoreEnumSpecInfo(variableName5,value5,remark5,isIntEnum));
-				for(int i=enumsList.size()-1;i>=0;i--){
-					if(enumsList.get(i)==null){
+
+				boolean isIntEnum = chkIntEnum.getSelection();
+				List<DescribableEnumSpecInfo<?>> enumsList = new ArrayList<DescribableEnumSpecInfo<?>>();
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName1, value1, remark1,
+						isIntEnum));
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName2, value2, remark2,
+						isIntEnum));
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName3, value3, remark3,
+						isIntEnum));
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName4, value4, remark4,
+						isIntEnum));
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName5, value5, remark5,
+						isIntEnum));
+				enumsList.add(DescribableEnumGeneratorUtil.createCoreEnumSpecInfo(variableName6, value6, remark6,
+						isIntEnum));
+				for (int i = enumsList.size() - 1; i >= 0; i--) {
+					if (enumsList.get(i) == null) {
 						enumsList.remove(i);
 					}
 				}
 				inputMap.put("enumInfoList", enumsList);
 				inputMap.put("isIntEnum", isIntEnum);
-				CoreEnumGeneratorUtil.generate(inputMap);
-				
-				MessageBox messageBox = new MessageBox(shell,SWT.OK);
+				DescribableEnumGeneratorUtil.generate(inputMap);
+
+				MessageBox messageBox = new MessageBox(shell, SWT.OK);
 				messageBox.setMessage("生成类文件成功！");
-				messageBox.open(); 
-				
+				messageBox.open();
+
 				clearText();
 			}
 		});
 		button.setBounds(174, 309, 146, 22);
 		button.setText("生成整形枚举信息");
-		
+
 		txtModuleName = new Text(shell, SWT.BORDER);
 		txtModuleName.setText("shop");
 		txtModuleName.setBounds(111, 7, 87, 25);
-		
+
 		Label label_2 = new Label(shell, SWT.NONE);
 		label_2.setBounds(10, 10, 240, 12);
 		label_2.setText("\u8BF7\u8F93\u5165\u6A21\u5757\u540D\u79F0\uFF1A");
-		
+
 		Label label_3 = new Label(shell, SWT.NONE);
 		label_3.setBounds(265, 38, 216, 12);
 		label_3.setText("\u8BF7\u6307\u5B9A\u679A\u4E3E\u7C7B\u578B\uFF1A");
-		
-		shell.setTabList(new Control[] {txtClassName, variableName1, value1, remark1, variableName2, value2, remark2, variableName3, value3, remark3, variableName4, value4, remark4, variableName5, value5, remark5, variableName6, value6, remark6, button});
+
+		shell.setTabList(new Control[] { txtClassName, variableName1, value1, remark1, variableName2, value2, remark2,
+				variableName3, value3, remark3, variableName4, value4, remark4, variableName5, value5, remark5,
+				variableName6, value6, remark6, button });
 	}
-	
-	private void clearText(){
+
+	private void clearText() {
 		txtClassName.setText("");
-		
+
 		variableName1.setText("");
 		value1.setText("");
 		remark1.setText("");
-		
+
 		variableName2.setText("");
 		value2.setText("");
 		remark2.setText("");
-		
+
 		variableName3.setText("");
 		value3.setText("");
 		remark3.setText("");
-		
+
 		variableName4.setText("");
 		value4.setText("");
 		remark4.setText("");
-		
+
 		variableName5.setText("");
 		value5.setText("");
 		remark5.setText("");
-		
+
 		variableName6.setText("");
 		value6.setText("");
 		remark6.setText("");

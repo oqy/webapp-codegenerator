@@ -4,6 +4,6 @@ import com.minyisoft.webapp.core.persistence.IBaseDao;
 import ${c.classFullName};
 import ${c.criteriaFullName};
 
-public interface I${c.alias}Dao extends IBaseDao<${c.alias}Info,${c.alias}Criteria> {
+public interface ${c.alias}Dao extends BaseDao<${c.alias}Info,${c.alias}Criteria> {
 
 }

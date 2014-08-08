@@ -38,16 +38,6 @@ public final class CodeGeneratorConfig {
 	 */
 	public static final String ENUM_DESCRIPTION_FILE_NAME="enumDescription.properties";
 	
-	/**
-	 * 枚举基类接口名（不包含包名）
-	 */
-	public static final String CORE_ENUM_INTERFAC_SIMPLE_NAME="ICoreEnum";
-	
-	/**
-	 * 权限对象MODEL KEY
-	 */
-	public static final String PERMISSION_MODEL_KEY="588A18A0";
-	
 	/*-------代码输出的相对目录路径，若按约定的规范进行编码，以下设定无需修改 begin---------------------------------------------------------*/
 	/**
 	 * 枚举对象相对工程模块的目录路径

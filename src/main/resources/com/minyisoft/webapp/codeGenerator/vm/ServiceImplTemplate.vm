@@ -8,5 +8,5 @@ import ${c.packageName}.persistence.I${c.alias}Dao;
 import ${c.packageName}.service.I${c.alias};
 
 @Service("${serviceName}Service")
-public class ${c.alias}Impl extends BaseServiceImpl<${c.alias}Info,${c.alias}Criteria,I${c.alias}Dao> implements I${c.alias} {
+public class ${c.alias}Impl extends BaseServiceImpl<${c.alias}Info,${c.alias}Criteria,${c.alias}Dao> implements ${c.alias}Service {
 }

@@ -1,16 +1,16 @@
 package ${classFullNamePrefix}.model.enumField;
 
-import com.minyisoft.webapp.core.model.enumField.CoreEnumInterface;
-import com.minyisoft.webapp.core.model.enumField.EnumDescriptionHelper;
+import com.minyisoft.webapp.core.model.enumField.DescribableEnumHelper;
+import com.minyisoft.webapp.core.model.enumField.DescribableEnum;
 
 #if($intEnum)
 #set($targetType="Integer")
 #else
 #set($targetType="String")
 #end
-public enum $enumClassName implements CoreEnumInterface<$targetType> {
+public enum $enumClassName implements DescribableEnum<$targetType> {
 	#foreach($enumInfo in $enumInfoList)
-	${enumInfo.variableName}(${enumInfo.value})#if($velocityCount==$enumInfoList.size());#else,#end // $enumInfo.description
+	${enumInfo.variableName}(#if($intEnum)${enumInfo.value}#else"${enumInfo.value}"#end)#if($velocityCount==$enumInfoList.size());#else,#end // $enumInfo.description
 	#end
 	
 	private $targetType typeValue;
@@ -20,7 +20,7 @@ public enum $enumClassName implements CoreEnumInterface<$targetType> {
 	}
 
 	public String getDescription() {
-		return EnumDescriptionHelper.getDescription(this);
+		return DescribableEnumHelper.getDescription(this);
 	}
 
 	public $targetType getValue() {

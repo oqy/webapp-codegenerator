@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="${c.packageName}.persistence.I${c.alias}Dao">
+<mapper namespace="${c.packageName}.persistence.${c.alias}Dao">
   <!-- ResultMap基础定义，可根据实际情况进行修改或扩展 -->
   <resultMap id="${c.alias}Result" type="${c.alias}Info">
   #foreach( $p in $c.propertyList)

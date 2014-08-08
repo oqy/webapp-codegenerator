@@ -270,8 +270,14 @@ public class MyBatisGenerator {
 				option.setGenerateCRUDPermission(isGenerateCRUDPermission.getSelection());
 				option.setPojoChineseName(txtPojoChineseName.getText());
 				
-				Map<String,Object> returnMap=MyBatisGeneratorUtil.generate(pojoFileName.getText(), outputFolderPath.getText(), propertyInfoList, option);
-				sqlOutput.setText(returnMap.get("SQL").toString());
+				try {
+					Map<String, Object> returnMap = MyBatisGeneratorUtil.generate(pojoFileName.getText(),
+							outputFolderPath.getText(), propertyInfoList, option);
+					sqlOutput.setText(returnMap.get("SQL").toString());
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+					System.exit(0);
+				}
 			}
 		});
 		generateButton.setText("运行");
