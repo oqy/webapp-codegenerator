@@ -16,22 +16,22 @@ public final class CodeGeneratorConfig {
 	/**
 	 * 目标工程磁盘根目录路径，供统一引用和修改
 	 */
-	private static final String TARGET_PROJECT_FILE_ROOT = "E:\\eclipse3.7\\workspace\\tex100-core\\";
+	private static final String TARGET_PROJECT_FILE_ROOT = "D:\\My Documents\\GitHub\\webapp-yjmz\\";
 	
 	/**
 	 * 目标工程代码包根目录，供统一引用和修改
 	 */
-	public static final String TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\java\\com\\minyisoft\\webapp\\tex100\\";
+	public static final String TARGET_PROJECT_PACKAGE_JAVA_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\java\\com\\minyisoft\\webapp\\yjmz\\";
 	
 	/**
 	 * 目标工程代码包根目录，供统一引用和修改
 	 */
-	public static final String TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\resources\\com\\minyisoft\\webapp\\tex100\\";
+	public static final String TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT=TARGET_PROJECT_FILE_ROOT+"src\\main\\resources\\com\\minyisoft\\webapp\\yjmz\\";
 	
 	/**
 	 * 生成的类对象全名前缀
 	 */
-	public static final String CLASS_FULL_NAME_PREFIX="com.minyisoft.webapp.tex100.";
+	public static final String CLASS_FULL_NAME_PREFIX="com.minyisoft.webapp.yjmz.";
 	
 	/**
 	 * 目标工程枚举描述文件名，供统一引用和修改
@@ -70,9 +70,13 @@ public final class CodeGeneratorConfig {
 	/*-------代码输出的相对目录路径，若按约定的规范进行编码，以上设定无需修改 end---------------------------------------------------------*/
 
 	/**
-	 * mybatis模板路径
+	 * mybatis oracle模板路径
 	 */
-	public static final String MYBATIS_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/MyBatisTemplate.vm";
+	public static final String MYBATIS_ORACLE_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/MyBatisTemplate_oracle.vm";
+	/**
+	 * mybatis mysql模板路径
+	 */
+	public static final String MYBATIS_MYSQL_TEMPLATE_FILE="com/minyisoft/webapp/codeGenerator/vm/MyBatisTemplate_mysql.vm";
 	/**
 	 * 过滤对象模板路径
 	 */
@@ -92,7 +96,7 @@ public final class CodeGeneratorConfig {
 	/**
 	 * 枚举模板路径
 	 */
-	public static final String ENUM_TEMPLATE="com/minyisoft/webapp/codeGenerator/vm/CoreEnumTemplate.vm";
+	public static final String ENUM_TEMPLATE="com/minyisoft/webapp/codeGenerator/vm/DescribableEnumTemplate.vm";
 	
 	/**
 	 * 数据表表名前缀

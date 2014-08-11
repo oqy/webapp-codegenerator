@@ -1,6 +1,6 @@
 package ${c.packageName}.persistence;
 
-import com.minyisoft.webapp.core.persistence.IBaseDao;
+import com.minyisoft.webapp.core.persistence.BaseDao;
 import ${c.classFullName};
 import ${c.criteriaFullName};
 

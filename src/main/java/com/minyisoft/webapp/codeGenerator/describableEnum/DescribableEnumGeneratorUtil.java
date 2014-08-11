@@ -48,6 +48,11 @@ public class DescribableEnumGeneratorUtil {
 
 			/* 生成配置文件信息 */
 			file = new File(CodeGeneratorConfig.TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT + moduleName + "\\"
+					+ CodeGeneratorConfig.ENUM_FOLDER);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			file = new File(CodeGeneratorConfig.TARGET_PROJECT_PACKAGE_RESOURCE_FILE_ROOT + moduleName + "\\"
 					+ CodeGeneratorConfig.ENUM_FOLDER + CodeGeneratorConfig.ENUM_DESCRIPTION_FILE_NAME);
 			for (DescribableEnumSpecInfo<?> enumInfo : enumInfoList) {
 				Files.append(

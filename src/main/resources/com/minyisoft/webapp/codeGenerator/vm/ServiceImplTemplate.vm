@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 import com.minyisoft.webapp.core.service.impl.BaseServiceImpl;
 import ${c.criteriaFullName};
 import ${c.classFullName};
-import ${c.packageName}.persistence.I${c.alias}Dao;
-import ${c.packageName}.service.I${c.alias};
+import ${c.packageName}.persistence.${c.alias}Dao;
+import ${c.packageName}.service.${c.alias}Service;
 
 @Service("${serviceName}Service")
-public class ${c.alias}Impl extends BaseServiceImpl<${c.alias}Info,${c.alias}Criteria,${c.alias}Dao> implements ${c.alias}Service {
+public class ${c.alias}ServiceImpl extends BaseServiceImpl<${c.alias}Info,${c.alias}Criteria,${c.alias}Dao> implements ${c.alias}Service {
 }
