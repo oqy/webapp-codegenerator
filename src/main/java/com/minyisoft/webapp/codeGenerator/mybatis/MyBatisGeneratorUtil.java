@@ -62,7 +62,7 @@ public class MyBatisGeneratorUtil {
 		transferObject.setCriteriaFullName(classFullName.substring(0, classFullName.lastIndexOf('.')) + ".criteria."
 				+ alias + "Criteria");
 		transferObject.setAlias(alias);
-		// 获取模块名，如包名为com.fusung.webapp.tex100.shop，则模块名为shop
+		// 获取模块名，如包名为com.minyisoft.webapp.tex100.shop，则模块名为shop
 		String tableName = CodeGeneratorConfig.TABLE_PREFIX
 				+ StringUtils.lowerCase(StringUtils.removeStart(transferObject.getPackageName(),
 						CodeGeneratorConfig.CLASS_FULL_NAME_PREFIX).replace('.', '_')) + "_" + alias.toLowerCase();

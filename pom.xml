@@ -12,7 +12,7 @@
 		<swt.version>3.3.0-v3346</swt.version>
 		<velocity.version>1.7</velocity.version>
 		<!-- Plugin的属性定义 -->
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.7</jdk.version>
 	</properties>
 
 	<!-- 依赖项定义 -->
